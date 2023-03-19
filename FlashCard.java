@@ -1,5 +1,8 @@
 public class FlashCard {
-    public static void main(String[] args){
-        
+    private String question, answer;
+
+    public FlashCard(String question, String answer){
+        this.question = question;
+        this.answer = answer;
     }
 }

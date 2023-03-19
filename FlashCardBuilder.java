@@ -73,7 +73,10 @@ class MyApp extends JFrame{
         nextCardBtn.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){
-                System.out.println("Button Clicked");
+                FlashCard fc = new FlashCard(question.getText(), answer.getText());
+                al = new ArrayList<FlashCard>();
+                al.add(fc);
+                
             }
         });
 
