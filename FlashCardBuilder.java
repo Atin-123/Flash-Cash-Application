@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.io.*;
 
 class MyApp extends JFrame{
     private JPanel panel;
@@ -73,9 +74,16 @@ class MyApp extends JFrame{
         nextCardBtn.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){
-                FlashCard fc = new FlashCard(question.getText(), answer.getText());
+                //create a FlashCard
+                FlashCard fc = new FlashCard(quesTa.getText(), ansTa.getText());
                 al = new ArrayList<FlashCard>();
                 al.add(fc);
+                
+                quesTa.setText("");
+                ansTa.setText("");
+
+                quesTa.requestFocus(); // we want to focus the cursor on the quesTa once we press next card button.
+
                 
             }
         });
@@ -90,12 +98,30 @@ class MyApp extends JFrame{
         saveMenuItem.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae){
-                System.out.println("File Saved");
+                JFileChooser fc = new JFileChooser();
+                fc.showSaveDialog(new MyApp());
+                saveFile(fc.getSelectedFile());
             }
         });
 
+    }
 
+    public void saveFile(File f) {
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 
+            Iterator<FlashCard> i = al.iterator();
+
+            while(i.hasNext()){
+                //get particular flashcard and get 
+                FlashCard fc = (FlashCard) i.next();
+                bw.write(fc.getQuestion()+"/");
+                bw.write(fc.getAnswer()+"\n");
+            }
+            bw.close();
+        }catch(IOException e){
+
+        }
     }
 
     
