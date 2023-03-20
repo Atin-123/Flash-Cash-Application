@@ -68,6 +68,8 @@ class MyApp extends JFrame{
         panel.add(nextCardBtn);
 
 
+        al = new ArrayList<FlashCard>();
+
         getContentPane().add(BorderLayout.CENTER, panel);
 
         //add listeners to components
@@ -76,8 +78,8 @@ class MyApp extends JFrame{
             public void actionPerformed(ActionEvent ae){
                 //create a FlashCard
                 FlashCard fc = new FlashCard(quesTa.getText(), ansTa.getText());
-                al = new ArrayList<FlashCard>();
                 al.add(fc);
+                System.out.println(al.size());
                 
                 quesTa.setText("");
                 ansTa.setText("");
@@ -113,7 +115,8 @@ class MyApp extends JFrame{
             Iterator<FlashCard> i = al.iterator();
 
             while(i.hasNext()){
-                //get particular flashcard and get 
+                System.out.println("Writing");
+                //get particular flashcard 
                 FlashCard fc = (FlashCard) i.next();
                 bw.write(fc.getQuestion()+"/");
                 bw.write(fc.getAnswer()+"\n");
